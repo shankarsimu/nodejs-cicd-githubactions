@@ -2,8 +2,8 @@ version: "3.8"
 
 services:
   app:
-    image: amitabhdevops/cicd-app
-    container_name: "CICD-app"
+    image: ghostrider412/cicd-node-app
+    container_name: "CICD-Node-app"
 
     ports:
       - "3000:3000"
