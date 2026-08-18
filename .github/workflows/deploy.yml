@@ -36,7 +36,8 @@ jobs:
         - name: checkout code
           uses: actions/checkout@v3
           with:
-            token: ${{ secrets.PAT_GITHUB }}
+            repository: shankarsimu/nodejs-cicd-githubactions
+            token: ${{ secrets.GITHUB_TOKEN }}
 
         - name: update-manifest
           run: |
