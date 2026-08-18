@@ -45,7 +45,7 @@ jobs:
 
         - name: Push to GitHub
           run: |
-            git config --global user.name "Shankarsimu"
+            git config --global user.name "shankarsimu"
             git config --global user.email "Github@action.com"
             git add k8s/deployment.yaml
             git commit -m "chore: udpated docker tag to ${{ github.sha }} [skip ci]"
