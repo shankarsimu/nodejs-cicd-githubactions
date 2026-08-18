@@ -35,7 +35,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}  #ubuntu
           key: ${{ secrets.EC2_PRIVATE_KEY }} #private key from ec2 instance
           script: |
-            cd cicd-nodejs-app
+            cd /home/ubuntu/cicd-nodejs-app
             git pull
             docker compose pull
             docker compose down
