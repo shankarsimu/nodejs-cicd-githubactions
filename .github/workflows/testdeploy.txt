@@ -1,0 +1,42 @@
+name: "CICD NodeJS Application"
+
+on:
+  push:
+    branches: ["main"]
+    paths-ignore:
+      - "README.md"
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Docker Hub Login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Docker file
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/cicd-app .
+
+      - name: Push to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/cicd-app
+
+  deploy-to-ec2:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }} #public ip of ec2 instance
+          username: ${{ secrets.EC2_USER }}  #ubuntu
+          key: ${{ secrets.EC2_PRIVATE_KEY }} #private key from ec2 instance
+          script: |
+            cd /home/ubuntu/cicd-nodejs-app
+            git pull
+            docker compose pull
+            docker compose down
+            docker compose up -d --build
