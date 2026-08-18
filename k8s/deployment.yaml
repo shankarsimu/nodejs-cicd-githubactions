@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: cicd-app
-        image: ghostrider412/cicd-app:8bd113b8968c4f9c16bbaa800dce0b037a3d5bfd
+        image: ghostrider412/cicd-app:d4ea8dafb508ef12fea36025b3ae2659e4a70352
         ports:
         - containerPort: 3000
