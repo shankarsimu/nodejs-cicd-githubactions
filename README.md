@@ -29,3 +29,5 @@ To make the deployment pipeline work, you must add the following secrets in your
 
 ## 📝 License
 This project is open-source and available for educational purposes.
+
+#happy_to_be_devops
